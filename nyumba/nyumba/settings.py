@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'nyumba.wsgi.application'
 #     }
 # }
     ##databases
-
+import django_psdb_engine
 DATABASES = {
   'default': {
     'ENGINE': 'django_psdb_engine',
