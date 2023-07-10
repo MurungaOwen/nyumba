@@ -18,5 +18,12 @@ class Houses(models.Model):
     image_3=models.ImageField(upload_to="houses")
     uploaded=models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.category + "---->" + self.location
+    
+    class Meta:
+        verbose_name_plural="Houses" #hii ni ya kutoa extra s kwa the name yenye ni default
+    
+
 
 
