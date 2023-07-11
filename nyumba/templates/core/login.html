@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}signup{% endblock title %}
+{% block content %}
+<form method="POST" action="">
+        {% csrf_token %}
+     {{form.as_p}}
+     <button>done</button>
+</form>
+{% endblock content %}
