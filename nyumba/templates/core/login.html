@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}signup{% endblock title %}
 {% block content %}
-<form method="POST" action="">
+<form method="POST" action="/login_user">
         {% csrf_token %}
      {{form.as_p}}
-     <button>done</button>
+     <button type="submit">done</button>
 </form>
 {% endblock content %}

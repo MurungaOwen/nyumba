@@ -3,11 +3,17 @@
 {% block title %}signup{% endblock title %}
 {% block content %}
 <div class="login-box">
- 
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
     <form method="POST" action="/create_user">
         {% csrf_token %}
+        <small>{{form.errors|striptags}}</small></br>
      {{form.as_p}}
-     <button>done</button>
+     <button type="submit">done</button>
     </form>
+{% for error in field.form %}
+{{error}}
+{% endfor %}
   </div>
 {% endblock content %}

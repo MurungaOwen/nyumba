@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("",views.index),
     path("data/",views.data_json),
-    path("create_user",views.register_user)
+    path("create_user",views.register_user),
+    path("login_user",views.login_user)
 ]
