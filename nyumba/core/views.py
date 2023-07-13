@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
 from .models import Houses
 from django.contrib.auth import authenticate,login,logout
@@ -32,10 +32,18 @@ def login_user(request):
         username=request.POST.get("username")
         password=request.POST.get("password")
         user=authenticate(username=username,password=password)
-        if user is not None:
+        if user:
             login(request,user)
-            messages.success("user logged in successfully")
+            messages.success(request,"user logged in successfully")
+            return redirect("/")
         else:
             messages.error(request,"check the username or password and try again")
     form=LoginForm()
     return render(request,"core/login.html",locals())
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("login_user")
+
+

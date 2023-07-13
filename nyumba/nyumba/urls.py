@@ -18,9 +18,21 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static 
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",include("core.urls"))
+    path("",include("core.urls")),
+    path("change_password/",auth_views.PasswordChangeView.as_view(template_name="core/change-password.html",success_url="/")),
+    ##################################
+    #for forgotten passwords  |
+    #                         |
+    #                         ~
+    #################################
+    path("forgot-password/",auth_views.PasswordResetView.as_view(template_name="core/forgot_password.html")),
+    path('email_sent/', auth_views.PasswordResetDoneView.as_view(template_name="core/emailsent.html"), name ='password_reset_done'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name="core/newpass.html"), name ='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="core/passwd_done.html"), name ='password_reset_complete'),
+
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
