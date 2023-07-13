@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
-from .models import Houses
+from .models import Houses,Like
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from .forms import RegisterForm,LoginForm
@@ -45,5 +45,16 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("login_user")
+
+def like(request):
+    pk=request.POST.get("house_id")
+    item=Houses.objects.get(pk=pk)
+    user=request.user
+    add=Like.objects.get_or_create(item=item,user=user)
+    #return sth
+
+
+
+
 
 
