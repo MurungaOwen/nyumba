@@ -2,7 +2,9 @@
 {% load static %}
 {% block title %}signup{% endblock title %}
 {% block content %}
-<form method="POST" action="/login_user">
+{% for message in messages  %}
+{{message}}{% endfor %}
+<form method="POST" action="/user/login">
         {% csrf_token %}
      {{form.as_p}}
      <button type="submit">done</button>

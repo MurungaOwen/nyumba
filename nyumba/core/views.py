@@ -35,7 +35,7 @@ def login_user(request):
         if user:
             login(request,user)
             messages.success(request,"user logged in successfully")
-            return redirect("/")
+            return redirect("core:home")
         else:
             messages.error(request,"check the username or password and try again")
     form=LoginForm()
@@ -44,14 +44,20 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect("login_user")
+    messages.success(request,"successfully logged out")
+    return redirect("core:login")
+    
 
+def category(request,val):
+    houses=Houses.objects.filter(category=val)
+    return render(request,"core/category.html",locals())
 def like(request):
     pk=request.POST.get("house_id")
     item=Houses.objects.get(pk=pk)
     user=request.user
     add=Like.objects.get_or_create(item=item,user=user)
     #return sth
+
 
 
 
